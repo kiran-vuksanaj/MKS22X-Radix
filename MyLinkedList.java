@@ -1,4 +1,4 @@
-public class MyLinkedList{
+public class MyLinkedList<E>{
   private int size;
   private Node start,end;
   public MyLinkedList(){
@@ -7,7 +7,7 @@ public class MyLinkedList{
   public int size(){
     return size;
   }
-  public boolean add(int value){
+  public boolean add(E value){
     if(size()==0){
       start = new Node(value,null,null);
       end = start;
@@ -37,32 +37,32 @@ public class MyLinkedList{
     }
     return current;
   }
-  public Integer get(int index){
+  public E get(int index){
     if(index < 0 || index >= size()) throw new ArrayIndexOutOfBoundsException(index);
     return getNode(index).getData();
   }
-  public Integer set(int index, Integer val){
+  public E set(int index, E val){
     if(index < 0 || index >= size()) throw new ArrayIndexOutOfBoundsException(index);
     return getNode(index).setData(val);
   }
-  public boolean contains(Integer value){
+  public boolean contains(E value){
     Node current = start;
-    while(!(current.getData().equals(value)) && current != end){
+    while(!(current.dataEquals(value)) && current != end){
       current = current.next();
     }
     return current!=end || end.getData().equals(value);
   }
-  public int indexOf(Integer value){
+  public int indexOf(E value){
     Node current = start;
     int i = 0;
-    while(!(current.getData().equals(value)) && current != end){
+    while(!(current.dataEquals(value)) && current != end){
       current = current.next();
       i++;
     }
-    if (current==end && !(end.getData().equals(value))) return -1;
+    if (current==end && !(end.dataEquals(value))) return -1;
     else return i;
   }
-  public Integer remove(int index){
+  public E remove(int index){
     if(index >= size() || index < 0) throw new ArrayIndexOutOfBoundsException(index);
     size--;
     if(index==0){
@@ -75,9 +75,9 @@ public class MyLinkedList{
     }
     return getNode(index).remove().getData();
   }
-  public boolean remove(Integer value){
+  public boolean remove(E value){
     Node current = start;
-    while(current != null && !(current.equals(value))){
+    while(current != null && !(current.dataEquals(value))){
       current = current.next();
     }
     if(current==null){
@@ -94,7 +94,7 @@ public class MyLinkedList{
     size--;
     return true;
   }
-  public void add(int index,Integer value){
+  public void add(int index,E value){
     if(index < 0 || index >= size()) throw new ArrayIndexOutOfBoundsException(index);
     if(index==0){
       start = new Node(value,start,null);
@@ -108,7 +108,7 @@ public class MyLinkedList{
       size++;
     }
   }
-  public void extend(MyLinkedList other){
+  public void extend(MyLinkedList<E> other){
     end.setNext(other.start);
     end = other.end;
     size += other.size;
@@ -123,18 +123,18 @@ public class MyLinkedList{
 
 
   private class Node{
-    private Integer data;
+    private E data;
     private Node next,prev;
-    public Node(Integer data,Node next,Node prev){
+    public Node(E data,Node next,Node prev){
       this.data = data;
       this.next = next;
       this.prev = prev;
     }
-    public Integer getData(){
+    public E getData(){
       return data;
     }
-    public Integer setData(Integer data){
-      Integer out = this.data;
+    public E setData(E data){
+      E out = this.data;
       this.data = data;
       return out;
     }
@@ -150,7 +150,7 @@ public class MyLinkedList{
     private void setNext(Node n){
       next = n;
     }
-    public Node addAfter(Integer val){
+    public Node addAfter(E val){
       next = new Node(val,next,this);
       if(next.next()!=null) next.next().setPrev(next);
       return next;
@@ -160,11 +160,13 @@ public class MyLinkedList{
       if (prev != null) {prev.setNext(next); System.out.println(prev.getData());}
       return this;
     }
+    public boolean dataEquals(E other){
+      return getData().equals(other);
+    }
+    /*raises issue at compiler level as of right now
     public boolean equals(Node other){
       return getData().equals(other.getData());
     }
-    public boolean equals(Integer other){
-      return getData().equals(other);
-    }
+    */
   }
 }
