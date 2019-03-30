@@ -119,6 +119,11 @@ public class MyLinkedList<E>{
     start = null;
     end = null;
   }
+  public E removeFront(){
+    E out = start.getData();
+    start = start.next();
+    return out;
+  }
 
 
 
