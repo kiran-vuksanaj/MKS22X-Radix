@@ -18,7 +18,11 @@ public class Radix{
     }
   }
   private static int max(int[] data){
-    return -1;
+    int out = data[0];
+    for(int val : data){
+      if(out < val) out = val;
+    }
+    return out;
   }
   private static MyLinkedList<Integer> arrayToMLL(int[] data){
     MyLinkedList<Integer> out = new MyLinkedList<Integer>();
