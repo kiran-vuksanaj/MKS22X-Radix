@@ -1,6 +1,9 @@
+import java.util.Arrays;
 public class Radix{
   public static void main(String[] args){
-
+    int[] briefTest = {4, 2, 3, 4, 4, 7, 8 ,2};
+    radixsort(briefTest);
+    System.out.println(briefTest);
   }
   public static void radixsort(int[] data){
     int maxVal = max(data);
