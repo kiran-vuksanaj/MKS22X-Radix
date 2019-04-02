@@ -109,7 +109,7 @@ public class MyLinkedList<E>{
     }
   }
   public void extend(MyLinkedList<E> other){
-    System.out.print(this+" + "+other+" = ");
+    //System.out.print(this+" + "+other+" = ");
     if(this.size() == 0){
       this.start = other.start;
       this.end = other.end;
@@ -121,7 +121,7 @@ public class MyLinkedList<E>{
       size += other.size();
       other.reset();
     }
-    System.out.println(this);
+    //System.out.println(this);
   }
   private void reset(){
     size=0;
