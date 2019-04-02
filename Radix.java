@@ -1,17 +1,17 @@
 import java.util.Arrays;
 public class Radix{
   public static void main(String[] args){
-    int[] briefTest = {4, 2, 3, 4, 4, 7, 8 ,2};
+    int[] briefTest = {4, 2, 3, 4,12,6,798,2,2,4, 4, 7, 8 ,2};
     radixsort(briefTest);
-    //System.out.println(Arrays.toString(briefTest));
+    System.out.println(Arrays.toString(briefTest));
   }
   public static void radixsort(int[] data){
     int maxVal = max(data);
     MyLinkedList<Integer> modifData = arrayToMLL(data);
-    System.out.println(modifData);
+    //System.out.println(modifData);
     modifData = radix(modifData,0,maxVal);
-    System.out.println(modifData);
-    data = MLLtoArray(modifData);
+    //System.out.println(modifData);
+    putMLLinArray(modifData,data);
   }
   private static MyLinkedList<Integer> radix(MyLinkedList<Integer> data, int pow,int maxVal){
     //System.out.println("  "+data);
@@ -60,8 +60,8 @@ public class Radix{
     }
     return out;
   }
-  private static int[] MLLtoArray(MyLinkedList<Integer> data){
-    int[] out = new int[data.size()];
+  private static int[] putMLLinArray(MyLinkedList<Integer> data,int[] out){
+    //precondition: sizes equal
     int i = 0;
     while(data.size() > 0){
       out[i++] = data.removeFront();
