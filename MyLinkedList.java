@@ -109,10 +109,19 @@ public class MyLinkedList<E>{
     }
   }
   public void extend(MyLinkedList<E> other){
-    end.setNext(other.start);
-    end = other.end;
-    size += other.size;
-    other.reset();
+    System.out.print(this+" + "+other+" = ");
+    if(this.size() == 0){
+      this.start = other.start;
+      this.end = other.end;
+      this.size = other.size;
+    }else if(other.size() > 0){
+      Node joinPoint = other.start;
+      end.setNext(joinPoint);
+      end = other.end;
+      size += other.size();
+      other.reset();
+    }
+    System.out.println(this);
   }
   private void reset(){
     size=0;
