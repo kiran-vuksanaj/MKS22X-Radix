@@ -12,13 +12,18 @@ public class Radix{
     data = MLLtoArray(modifData);
   }
   private static void radix(MyLinkedList<Integer> data, int pow,int maxVal){
+    System.out.println(data);
     if(Math.pow(10,pow) <= maxVal){
       MyLinkedList<Integer>[] buckets = new MyLinkedList[10];
+      //initialize buckets
       for(int i=0;i<buckets.length;i++){
         buckets[i] = new MyLinkedList<Integer>();
       }
       while(data.size() > 0){
-        addToBucket(buckets,data.remove(0),pow);
+        System.out.println(data.size());
+        System.out.println(data);
+        int val = data.removeFront();
+        addToBucket(buckets,val,pow);
       }
       data = mergeBuckets(buckets);
     }
@@ -40,6 +45,7 @@ public class Radix{
   private static void addToBucket(MyLinkedList<Integer>[] buckets,int val, int pow){
     int place = ((val % (int)(Math.pow(10,pow+1))) / (int)(Math.pow(10,pow)));
     buckets[place].add(val);
+    System.out.println(place+": "+buckets[place]);
   }
   private static MyLinkedList<Integer> mergeBuckets(MyLinkedList<Integer>[] buckets){
     MyLinkedList<Integer> out = buckets[0];
