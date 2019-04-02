@@ -9,10 +9,9 @@ public class Radix{
   }
   private static void radix(MyLinkedList<Integer> data, int pow,int maxVal){
     if(Math.pow(10,pow) <= maxVal){
-      @SuppressWarnings("unchecked")
       MyLinkedList<Integer>[] buckets = new MyLinkedList[10];
       while(data.size() > 0){
-        addToBucket(buckets,data.remove(0));
+        addToBucket(buckets,data.remove(0),pow);
       }
       //merge buckets
     }
@@ -31,7 +30,8 @@ public class Radix{
     }
     return out;
   }
-  private static void addToBucket(MyLinkedList<Integer>[] buckets,int val){
-
+  private static void addToBucket(MyLinkedList<Integer>[] buckets,int val, int pow){
+    int place = ((val % (int)(Math.pow(10,pow+1))) / (int)(Math.pow(10,pow)));
+    buckets[place].add(val);
   }
 }
