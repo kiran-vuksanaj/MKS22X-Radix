@@ -3,16 +3,18 @@ public class Radix{
   public static void main(String[] args){
     int[] briefTest = {4, 2, 3, 4, 4, 7, 8 ,2};
     radixsort(briefTest);
-    System.out.println(briefTest);
+    //System.out.println(Arrays.toString(briefTest));
   }
   public static void radixsort(int[] data){
     int maxVal = max(data);
     MyLinkedList<Integer> modifData = arrayToMLL(data);
-    radix(modifData,0,maxVal);
+    System.out.println(modifData);
+    modifData = radix(modifData,0,maxVal);
+    System.out.println(modifData);
     data = MLLtoArray(modifData);
   }
-  private static void radix(MyLinkedList<Integer> data, int pow,int maxVal){
-    System.out.println(data);
+  private static MyLinkedList<Integer> radix(MyLinkedList<Integer> data, int pow,int maxVal){
+    //System.out.println("  "+data);
     if(Math.pow(10,pow) <= maxVal){
       MyLinkedList<Integer>[] buckets = new MyLinkedList[10];
       //initialize buckets
@@ -20,12 +22,16 @@ public class Radix{
         buckets[i] = new MyLinkedList<Integer>();
       }
       while(data.size() > 0){
-        System.out.println(data.size());
-        System.out.println(data);
+        //System.out.println(data.size());
+        //System.out.println(data);
         int val = data.removeFront();
         addToBucket(buckets,val,pow);
       }
       data = mergeBuckets(buckets);
+      //System.out.println("  "+data);
+      return radix(data,pow+1,maxVal);
+    }else{
+      return data;
     }
   }
   private static int max(int[] data){
@@ -45,7 +51,7 @@ public class Radix{
   private static void addToBucket(MyLinkedList<Integer>[] buckets,int val, int pow){
     int place = ((val % (int)(Math.pow(10,pow+1))) / (int)(Math.pow(10,pow)));
     buckets[place].add(val);
-    System.out.println(place+": "+buckets[place]);
+    //System.out.println(place+": "+buckets[place]);
   }
   private static MyLinkedList<Integer> mergeBuckets(MyLinkedList<Integer>[] buckets){
     MyLinkedList<Integer> out = buckets[0];
