@@ -2,11 +2,13 @@ import java.util.Arrays;
 public class Radix{
   public static void main(String[] args){
     int[] briefTest = {9,8,7,6,5,4,3,2,1};
-    radixsortBin(briefTest);
+    radixsort(briefTest);
     System.out.println(Arrays.toString(briefTest));
   }
   //binary radixsort
-  public static void radixsortBin(int[] data){
+  //im making this my default one because its still radix but its so much faster
+  //if the decimal version needs to be tested, the code is still there (in radixsortDecimal)
+  public static void radixsort(int[] data){
     int maxVal = max(data);
     radixbin(data,1,maxVal);
   }
@@ -42,7 +44,7 @@ public class Radix{
     }
   }
   //decimal radixsort
-  public static void radixsort(int[] data){
+  public static void radixsortDecimal(int[] data){
     int maxVal = max(data);
     MyLinkedList<Integer> modifData = arrayToMLL(data);
     //System.out.println(modifData);
