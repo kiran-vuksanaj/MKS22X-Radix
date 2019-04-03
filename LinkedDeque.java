@@ -35,10 +35,18 @@ public class LinkedDeque{
     size++;
   }
   public int removeFirst(){
-    return -1;
+    int out = start.data();
+    start = start.next();
+    start.setPrev(null);
+    size--;
+    return out;
   }
   public int removeLast(){
-    return -1;
+    int out = end.data();
+    end = end.prev();
+    end.setNext(null);
+    size--;
+    return out;
   }
   public int getFirst(){
     return -1;
