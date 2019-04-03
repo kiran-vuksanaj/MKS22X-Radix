@@ -49,10 +49,10 @@ public class LinkedDeque{
     return out;
   }
   public int getFirst(){
-    return -1;
+    return start.data();
   }
   public int getLast(){
-    return -1;
+    return end.data();
   }
   public void extend(LinkedDeque other){
 
