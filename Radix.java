@@ -13,6 +13,26 @@ public class Radix{
   private static void radixbin(int[] data,int place,int maxVal){
     if(place <= maxVal){
       //1. sort at this level
+      int[] temp = new int[data.length];//temporary necessary bc back end goes in backwards
+      int s = 0;
+      int e = data.length;
+      for(int val : data){
+        if( (val & place) == 0 ){
+          temp[s++] = val; //leaves s in empty space to write
+        }else{
+          temp[--e] = val; //leaves e in a space just used
+        }
+      }
+      //at this point: temp has two buckets
+      //    temp[:s] - 0 at this place value
+      //    temp[e:] - 1 at this place value, but values reversed
+      //2. reverse order of second bucket copying back into original
+      for(int i=0;i<s;i++){
+        data[i] = temp[i];
+      }
+      for(int i=0; i+e < data.length ; i++){
+        data[data.length - 1] = temp[i+e];
+      }
       //2. recurse up
       radixbin(data,place << 1,maxVal);
     }
