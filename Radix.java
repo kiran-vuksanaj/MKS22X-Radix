@@ -5,6 +5,19 @@ public class Radix{
     radixsort(briefTest);
     System.out.println(Arrays.toString(briefTest));
   }
+  //binary radixsort
+  public static void radixsortBin(int[] data){
+    int maxVal = max(data);
+    radixbin(data,1,maxVal);
+  }
+  private static void radixbin(int[] data,int place,int maxVal){
+    if(place <= maxVal){
+      //1. sort at this level
+      //2. recurse up
+      radixbin(data,place << 1,maxVal);
+    }
+  }
+  //decimal radixsort
   public static void radixsort(int[] data){
     int maxVal = max(data);
     MyLinkedList<Integer> modifData = arrayToMLL(data);
