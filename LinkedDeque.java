@@ -14,11 +14,25 @@ public class LinkedDeque{
     end = null;
     size = 0;
   }
-  public void addFirst(){
-
+  public void addFirst(int val){
+    if(size == 0){
+      start = new Node(null,null,val);
+      end = start;
+    }else{
+      start = new Node(null,start,val);
+      start.next().setPrev(start);
+    }
+    size++;
   }
-  public void addLast(){
-
+  public void addLast(int val){
+    if(size == 0){
+      end = new Node(null,null,val);
+      start = end;
+    }else{
+      end = new Node(end,null,val);
+      end.prev().setNext(end);
+    }
+    size++;
   }
   public int removeFirst(){
     return -1;
