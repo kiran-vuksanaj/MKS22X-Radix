@@ -53,13 +53,28 @@ public class Radix{
   //decimal radixsort
   public static void radixsortDecimal(int[] data){
     int maxVal = max(data);
-    radixdecimal(data,1,maxVal);
+    //copy data into linked deque
+    LinkedDeque dataDeque = new LinkedDeque();
+    for(int val : data){
+      dataDeque.addLast(val);
+    }
+    radixdecimal(dataDeque,1,maxVal);
+    //copy data out of deque
+    PrimitiveIterator.OfInt iter = dataDeque.iterator();
+    for(int i=0;iter.hasNext();i++){
+      data[i] = iter.nextInt();
+    }
   }
-  private static void radixdecimal(int[] data,int place,int maxVal){
+  private static void radixdecimal(LinkedDeque data,int place,int maxVal){
     if(place <= maxVal){
       //recursive case (base does nothing)
-      //1. do all the stuff
-      //2. recurse up
+      //initialize buckets
+      LinkedDeque buckets = new LinkedDeque[10];
+      for(int i=0;i<buckets.length;i++){
+        buckets[i] = new LinkedDeque();
+      }
+      //iterate throu
+      //finally: recurse up to next place
       radixdecimal(data,place*10,maxVal);
     }
   }
