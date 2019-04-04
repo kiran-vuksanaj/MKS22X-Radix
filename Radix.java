@@ -1,16 +1,18 @@
 import java.util.*;
 public class Radix{
   public static void main(String[] args){
-    int[] briefTest = {9,9,8,8,7,7,6,6,5,5,4,4,3,3,2,2,1,1};
-    radixsortDecimal(briefTest);
+    int[] briefTest = {-5,6,4,-3};
+    radixsort(briefTest);
     System.out.println(Arrays.toString(briefTest));
   }
   //binary radixsort
   //im making this my default one because its still radix but its so much faster
   //if the decimal version needs to be tested, the code is still in here (in radixsortDecimal)
   public static void radixsort(int[] data){
-    int maxVal = max(data);
-    radixbin(data,1,maxVal);
+    if(data.length != 0){
+      int maxVal = max(data);
+      radixbin(data,1,maxVal);
+    }
   }
   private static void radixbin(int[] data,int place,int maxVal){
     //System.out.println(place+": "+Arrays.toString(data));
@@ -41,6 +43,29 @@ public class Radix{
       }
       //2. recurse up
       radixbin(data,place << 1,maxVal);
+    }else{
+      radixnegative(data);
+    }
+  }
+  private static void radixnegative(int[] data){
+    //same process as normal, just slightly modified for reordering buckets
+    int place = 1<<31;
+    int[] temp = new int[data.length];
+    int s = 0;
+    int e = data.length;
+    for(int val : data){
+      if( (val & place) == 0){//this means the thing is positive
+        temp[--e] = val;
+      }else{
+        temp[s++] = val;
+      }
+    }
+
+    for(int i=0;i<s;i++){
+      data[i] = temp[i];
+    }
+    for(int i=0;i+e < data.length;i++){
+      data[data.length -1 - i] = temp[i+e];
     }
   }
   private static int max(int[] data){
