@@ -43,5 +43,12 @@ public class Radix{
       radixbin(data,place << 1,maxVal);
     }
   }
+  private static int max(int[] data){
+    int out = data[0];
+    for(int val : data){
+      if(out < val) out = val;
+    }
+    return out;
+  }
   //decimal radixsort
 }
