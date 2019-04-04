@@ -1,3 +1,4 @@
+import java.util.*;
 public class LinkedDeque{
   //this is limited to ints, because for radix that is all that's necessary
   private Node start;
@@ -81,7 +82,20 @@ public class LinkedDeque{
       this.next = next;
     }
   }
-}
-class LDIterator{
-
+  class LDIterator implements PrimitiveIterator.OfInt{
+    LinkedDeque data;
+    Node current;
+    public LDIterator(LinkedDeque data){
+      this.data = data;
+      current = data.start;
+    }
+    public boolean hasNext(){
+      return current.next()==null;
+    }
+    public int nextInt(){
+      int out = current.data();
+      current = current.next();
+      return out;
+    }
+  }
 }
