@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.*;
 public class Radix{
   public static void main(String[] args){
     int[] briefTest = {9,8,7,6,5,4,3,2,1};
@@ -69,11 +69,22 @@ public class Radix{
     if(place <= maxVal){
       //recursive case (base does nothing)
       //initialize buckets
-      LinkedDeque buckets = new LinkedDeque[10];
+      LinkedDeque[] buckets = new LinkedDeque[10];
       for(int i=0;i<buckets.length;i++){
         buckets[i] = new LinkedDeque();
       }
-      //iterate throu
+      //iterate through data, placing into proper buckets
+      PrimitiveIterator.OfInt iter = data.iterator();
+      while(iter.hasNext()){
+        int val = iter.next();
+        int bucketInd = (val / place) % 10;
+        buckets[bucketInd].addLast(val);
+      }
+      //merge buckets into data
+      data.clear();
+      for(LinkedDeque bucket : buckets){
+        data.extend(bucket);
+      }
       //finally: recurse up to next place
       radixdecimal(data,place*10,maxVal);
     }
