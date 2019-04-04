@@ -12,7 +12,7 @@ public class Driver{
           int []data1 = new int[size];
           int []data2 = new int[size];
           for(int i = 0; i < data1.length; i++){
-            data1[i] = (int)(Math.random()*MAX);
+            data1[i] = (int)((Math.random()-.5)*2*MAX);
             data2[i] = data1[i];
           }
           long t1,t2;
