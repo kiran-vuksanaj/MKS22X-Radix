@@ -1,8 +1,8 @@
 import java.util.*;
 public class Radix{
   public static void main(String[] args){
-    int[] briefTest = {9,8,7,6,5,4,3,2,1};
-    radixsort(briefTest);
+    int[] briefTest = {9,9,8,8,7,7,6,6,5,5,4,4,3,3,2,2,1,1};
+    radixsortDecimal(briefTest);
     System.out.println(Arrays.toString(briefTest));
   }
   //binary radixsort
