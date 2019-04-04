@@ -114,7 +114,7 @@ public class LinkedDeque{
       current = data.start;
     }
     public boolean hasNext(){
-      return current.next()==null;
+      return current != null;
     }
     public int nextInt(){
       int out = current.data();
