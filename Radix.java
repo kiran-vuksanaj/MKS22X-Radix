@@ -51,4 +51,16 @@ public class Radix{
     return out;
   }
   //decimal radixsort
+  public static void radixsortDecimal(int[] data){
+    int maxVal = max(data);
+    radixdecimal(data,1,maxVal);
+  }
+  private static void radixdecimal(int[] data,int place,int maxVal){
+    if(place <= maxVal){
+      //recursive case (base does nothing)
+      //1. do all the stuff
+      //2. recurse up
+      radixdecimal(data,place*10,maxVal);
+    }
+  }
 }
