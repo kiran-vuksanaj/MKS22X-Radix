@@ -8,6 +8,7 @@ public class LinkedDeque{
     size = 0;
   }
   public String toString(){
+    if(size()==0) return "[]";
     PrimitiveIterator.OfInt iter = iterator();
     String out = "[";
     while(iter.hasNext()){
