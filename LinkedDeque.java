@@ -55,6 +55,9 @@ public class LinkedDeque{
   public int getLast(){
     return end.data();
   }
+  public PrimitiveIterator.OfInt iterator(){
+    return new LDIterator(this);
+  }
   public void extend(LinkedDeque other){
 
   }
