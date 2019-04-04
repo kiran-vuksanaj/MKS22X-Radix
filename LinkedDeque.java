@@ -10,6 +10,9 @@ public class LinkedDeque{
   public String toString(){
     return "";
   }
+  public int size(){
+    return size;
+  }
   public void clear(){
     start = null;
     end = null;
@@ -59,7 +62,20 @@ public class LinkedDeque{
     return new LDIterator(this);
   }
   public void extend(LinkedDeque other){
-
+    if(other.size() != 0){
+      if(this.size() == 0){
+        //if other has something and this doesn't, this becomes other
+        start = other.start;
+        end = other.end;
+        size = other.size();
+        other.clear();
+      }else{
+        end.setNext( other.start );
+        other.start.setPrev( end );
+        size += other.size();
+        other.clear();
+      }
+    }
   }
   private class Node{
     private Node prev,next;
